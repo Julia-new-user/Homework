@@ -1,0 +1,36 @@
+#include <iostream>
+using namespace std;
+#include <time.h>
+int main() {
+	setlocale(LC_ALL, "rus");
+	const int N = 1000000;
+	int a[N];
+	srand(time(0));
+	cout << "Исходный массив:\n";
+	for (int i = 0; i < N; i++) {
+		a[i] = rand() % 10000001;
+		cout << a[i] << "\t";
+	}
+	cout << endl;
+	// k - левая граница части массива
+	for (int k = 0; k < N - 1; k++) {
+		// Найти индекс минимума в подмассиве от k до N - 1
+		int imin = k;
+		for (int i = k + 1; i < N; i++) {
+			if (a[i] < a[imin]) {
+				imin = i;
+			}
+		}
+		// Поменять местами этот минимум и a[k]
+		int tmp = a[k];
+		a[k] = a[imin];
+		a[imin] = tmp;
+	}
+	cout << "Упорядоченный массив:\n";
+	for (int i = 0; i < N; i++) {
+		cout << a[i] << "\t";
+	}
+	cout << endl;
+	system("pause");
+	return 0;
+}
